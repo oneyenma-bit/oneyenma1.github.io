@@ -1,0 +1,256 @@
+/* Estilo elegante y minimalista */
+:root{
+  --bg:#0b0d10; /* fondo oscuro */
+  --card:#0f1113; /* cartas ligeramente más claras que el fondo */
+  --muted:#9aa0a6; /* texto secundario claro */
+  --accent:#e6eef9; /* texto principal claro */
+  --accent-2:#8b5cf6; /* acento morado (mantener) */
+  --glass: rgba(255,255,255,0.04); /* paneles translúcidos sutiles */
+}
+*{box-sizing:border-box}
+html{
+  font-size: 16px; /* Base font size */
+}
+@media (max-width: 480px) { html { font-size: 15px; } } /* Ajuste para móviles pequeños */
+
+body{height:100%;margin:0;font-family:Inter, Roboto, 'Helvetica Neue', Arial, sans-serif;background:linear-gradient(180deg,#070709,var(--bg));color:var(--accent)}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.site-header{padding:32px 0;text-align:center}
+.site-header h1{margin:0;font-weight:700;letter-spacing:1px}
+.tag{color:var(--muted);margin-top:6px}
+.main.container{display:grid;grid-template-columns:minmax(0, 1fr) 340px;gap:24px;align-items:start}
+.products{display:flex;flex-direction:column;gap:28px}
+.product{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(31,41,55,0.06);display:flex;flex-direction:column;align-items:center;text-align:center}
+.product img{width:100%;height:auto;aspect-ratio: 4 / 3;object-fit:cover;border-radius:8px;margin-bottom:12px}
+.product h2{margin:8px 0 4px;font-size:1.1rem}
+.price{color:var(--accent-2);font-weight:700;margin-bottom:8px}
+.qty{width:64px;padding:6px;border-radius:6px;border:1px solid #e6e6e6;text-align:center}
+.add{margin-top:10px;padding:10px 16px;border-radius:8px;background:linear-gradient(90deg,var(--accent-2),#5eead4);border:none;color:white;font-weight:600;cursor:pointer}
+.cart{background:transparent;padding:16px;border-radius:12px}
+.cart h3{margin-top:0}
+.cart-items{list-style:none;padding:0;margin:0 0 12px 0}
+.cart-items li{display:flex;justify-content:space-between;padding:8px 10px;border-radius:8px;background:var(--glass);margin-bottom:8px}
+.checkout{width:100%;padding:10px;border-radius:8px;border:none;background:var(--accent);color:white;font-weight:600;cursor:pointer}
+.site-footer{padding:22px 0;text-align:center;color:var(--muted)}
+@media (max-width:960px){
+  .main.container{grid-template-columns:minmax(0, 1fr) 280px;}
+}
+@media (max-width:800px){
+  main.container{grid-template-columns:1fr;}
+  .cart{order:2}
+}
+
+/* Navegación y animaciones adicionales */
+.site-header{background:transparent;position:sticky;top:0;z-index:1200}
+.site-header .nav-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{margin:0;font-weight:700;letter-spacing:1px;font-size:1.25rem;color:var(--accent)}
+.main-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+.main-nav a{color:var(--accent);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px;transition:background .18s, transform .12s}
+.main-nav a:hover{background:rgba(139,92,246,0.06);transform:translateY(-2px)}
+.main-nav a.active{background:rgba(139,92,246,0.12)}
+.nav-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;cursor:pointer;color:var(--accent)}
+
+/* Section entry animation */
+.anim-enter{opacity:0;transform:translateY(18px);transition:opacity 0.6s cubic-bezier(.2,.8,.2,1), transform 0.6s cubic-bezier(.2,.8,.2,1)}
+.anim-enter.show{opacity:1;transform:translateY(0)}
+
+@media (max-width:800px){
+  .main-nav{position:fixed;top:0;right:-100%;height:100vh;width:260px;background:var(--card);box-shadow:-8px 0 30px rgba(0,0,0,0.6);padding:80px 20px;transition:right 0.35s cubic-bezier(.4,0,.2,1);z-index:1100}
+  .main-nav.open{right:0}
+  .main-nav ul{flex-direction:column;gap:18px}
+  .nav-toggle{display:block}
+  .nav-wrap{padding:8px 12px}
+}
+
+/* Pequeños ajustes responsive para mejor lectura en oscuro */
+.lead{color:var(--muted)}
+.product{background:var(--card);box-shadow:0 6px 22px rgba(0,0,0,0.5)}
+
+/* Toast (notificaciones) */
+.toast-container{position:fixed;right:20px;bottom:20px;z-index:1400;display:flex;flex-direction:column;gap:10px}
+.toast{background:rgba(255,255,255,0.06);color:var(--accent);padding:12px 14px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.5);backdrop-filter: blur(6px);transform:translateY(10px);opacity:0;transition:opacity .24s, transform .24s}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{border-left:4px solid rgba(34,197,94,0.9)}
+.toast.warn{border-left:4px solid rgba(245,158,11,0.9)}
+
+/* Secciones: mostrar/ocultar con animación (single-view) */
+#home, #products, #contact, #game{
+  transition:opacity 0.5s ease, transform 0.5s ease, max-height 0.5s ease;
+  opacity:0;transform:translateY(18px);max-height:0;overflow:hidden;pointer-events:none;padding-top:0;padding-bottom:0;
+}
+#home.section-visible, #products.section-visible, #contact.section-visible, #game.section-visible{
+  opacity:1;transform:translateY(0);max-height:5000px;pointer-events:auto;padding-top:24px;padding-bottom:24px;
+}
+
+/* Modal de imagen (overlay) */
+.modal-img-viewer{position:fixed;inset:0;background:rgba(3,3,6,0.95);display:flex;align-items:center;justify-content:center;z-index:99999;opacity:0;pointer-events:none;transition:opacity .35s}
+.modal-img-viewer.active{opacity:1;pointer-events:auto}
+.modal-img-content{position:relative;max-width:90vw;max-height:86vh;display:flex;align-items:center;justify-content:center}
+.modal-img-content{position:relative;max-width:90vw;max-height:86vh;display:flex;align-items:center;justify-content:center;min-width:320px;min-height:200px}
+.modal-img-content img{max-width:86vw;max-height:80vh;border-radius:12px;display:block;opacity:0;transform:scale(.98);transition:opacity .26s ease, transform .32s cubic-bezier(.2,.8,.2,1)}
+.modal-img-content.show img{opacity:1;transform:scale(1)}
+.modal-img-close{position:absolute;top:10px;right:10px;background:rgba(255,255,255,0.95);border-radius:50%;width:38px;height:38px;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;z-index:100}
+
+/* --- Estilos para la sección de Juegos --- */
+#game { text-align: center; }
+
+#game-selection-menu {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.game-select-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background: var(--card);
+  border: 1px solid var(--glass);
+  color: var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.game-select-btn:hover { background: var(--glass); }
+
+.games-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+.game-view {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(31,41,55,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+.game-view h3 { margin-top: 0; }
+.game-start-menu .game-instructions { color: var(--muted); font-size: 0.9rem; margin: 4px 0 12px; }
+.game-start-menu .high-score { font-size: 0.9rem; color: var(--accent-2); font-weight: 600; margin: 10px 0; }
+.game-area p { margin-top: 8px; font-weight: 600; }
+.game-area {
+  position: relative; /* Para posicionar el botón de truco */
+}
+
+#gameCanvas, #dinoCanvas {
+  background: #1a1d21;
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  margin-top: 1rem;
+  max-width: 100%;
+  transition: filter 0.3s ease-in-out;
+}
+#gameCanvas.blurred, #dinoCanvas.blurred {
+  filter: blur(4px);
+}
+.game-over-menu {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 17, 19, 0.7);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.game-btn {
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg,var(--accent-2),#5eead4);
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.back-to-menu-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--glass);
+  border: none;
+  color: var(--muted);
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Controles en pantalla para el juego (móvil) */
+.game-controls {
+  display: none; /* Oculto por defecto en escritorio */
+  margin-top: 1rem;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.control-btn {
+  position: absolute;
+  width: 48px;
+  height: 50px;
+  background: var(--glass);
+  border: 1px solid var(--muted);
+  color: var(--accent);
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 8px;
+  -webkit-tap-highlight-color: transparent; /* Evita el destello azul al tocar en móviles */
+}
+.control-btn.up { top: 0; left: 51px; }
+.control-btn.left { top: 50px; left: 0; }
+.control-btn.down { top: 100px; left: 51px; }
+.control-btn.right { top: 50px; left: 102px; }
+
+@media (max-width: 800px) {
+  .game-controls {
+    display: block; /* Visible en móvil */
+  }
+}
+
+/* Notificación de Logro (Estilo Minecraft) */
+.achievement-toast {
+  position: fixed;
+  top: -100px; /* Inicia fuera de la pantalla */
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card);
+  border: 2px solid var(--glass);
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  z-index: 9999;
+  transition: top 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.achievement-toast.show {
+  top: 20px; /* Se desliza hacia adentro */
+}
+.achievement-icon {
+  font-size: 2rem;
+  margin-right: 16px;
+}
+.achievement-icon img {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+}
+.achievement-text .achievement-title {
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+}
+.achievement-text .achievement-subtitle {
+  color: var(--muted);
+  margin: 0;
+}

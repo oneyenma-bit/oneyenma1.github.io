@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tienda de Gorras — Elegance Caps</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <div class="brand">
+        <h1 class="logo">Elegance Caps</h1>
+        <p class="tag">Gorras elegantes — compra responsable</p>
+      </div>
+      <nav class="main-nav" aria-label="Menú principal">
+        <ul>
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#products">Productos</a></li>
+          <li><a href="#contact">Contacto</a></li>
+          <li><a href="#game">Juegos</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="products" class="products">
+    <article class="product" data-id="cap-basic">
+  <div class="img-frame"><img src="images/img1.jpg" alt="Gorra 100 Córdobas"></div>
+        <h2>Gorra Classic</h2>
+        <p class="price">100 C$</p>
+        <label> Cantidad: <input type="number" min="0" max="2" value="0" class="qty" data-price="100" aria-label="cantidad gorra classic"></label>
+        <button class="add">Agregar</button>
+      </article>
+
+      <article class="product" data-id="cap-premium">
+  <div class="img-frame"><img src="images/img2.jpg" alt="Gorra 400 Córdobas"></div>
+        
+        <h2>Gorra Premium</h2>
+        <p class="price">400 C$</p>
+        <label> Cantidad: <input type="number" min="0" max="2" value="0" class="qty" data-price="400" aria-label="cantidad gorra premium"></label>
+        <button class="add">Agregar</button>
+      </article>
+
+      <article class="product" data-id="cap-luxe">
+  <div class="img-frame"><img src="images/img3.jpg" alt="Gorra 1200 Córdobas"></div>
+        
+        <h2>Gorra Luxe</h2>
+        <p class="price">1200 C$</p>
+        <label> Cantidad: <input type="number" min="0" max="2" value="0" class="qty" data-price="1200" aria-label="cantidad gorra luxe"></label>
+        <button class="add">Agregar</button>
+      </article>
+    </section>
+
+    <aside class="cart">
+      <h3>Carrito</h3>
+      <ul class="cart-items"></ul>
+      <p class="total">Total: <span id="total">0</span> C$</p>
+      <button id="checkout" class="checkout">Finalizar compra</button>
+    </aside>
+    <section id="home" class="hero">
+      <h2>Quiénes somos</h2>
+      <p class="lead">Soy un chico nicaragüense de 17 años, apasionado por las gorras de calidad. Busco ofrecer piezas con estilo, duraderas y con toques únicos. Trabajo con cuidado en la selección de materiales y diseño, atento a cada detalle para que cada gorra represente elegancia y personalidad.</p>
+      <p class="lead">Mi objetivo es llevar gorras con excelente relación calidad-precio a mi comunidad y más allá. Si te interesa un envío o encargo especial, contáctame y con gusto lo coordinamos.</p>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Contacto</h2>
+        <p>Teléfono: <a href="tel:+50558657750">+505 58657750</a></p>
+        <p>Email: <a href="mailto:oneyenma1@gmail.com">oneyenma1@gmail.com</a></p>
+      </div>
+    </section>
+
+    <section id="game">
+      <h2>Juegos</h2>
+      <div id="game-selection-menu">
+        <button class="game-select-btn" data-game="snake">Snake Game</button>
+        <button class="game-select-btn" data-game="dino">Like Dino</button>
+      </div>
+
+      <div class="games-container" style="display: none;">
+        <div id="snake-game-view" class="game-view">
+          <button class="back-to-menu-btn" data-game="snake">← Volver</button>
+          <h3>Snake Game</h3>
+          <div class="game-start-menu">
+            <p>¿Listo para jugar?</p>
+            <p class="high-score">Mejor puntaje: <span id="snake-high-score">0</span></p>
+            <p class="game-instructions">Usa las flechas para moverte. ¡No choques!</p>
+            <p class="game-instructions"><small>Presiona 'Espacio' o el botón para empezar.</small></p>
+            <button id="gameActionBtn" class="game-btn">Empezar Juego</button>
+          </div>
+          <div class="game-area" style="display: none;">
+            <canvas id="gameCanvas" width="300" height="300"></canvas>
+            <p id="score-display">Puntuación: <span id="score">0</span></p>
+            <div class="game-over-menu" style="display: none;">
+              <h3>Game Over</h3>
+              <button class="game-btn">Volver a Jugar</button>
+            </div>
+          </div>
+        </div>
+        <div id="dino-game-view" class="game-view">
+          <button class="back-to-menu-btn" data-game="dino">← Volver</button>
+          <h3>Like Dino</h3>
+          <div class="game-start-menu">
+            <p>¿Listo para saltar?</p>
+            <p class="high-score">Mejor puntaje: <span id="dino-high-score">0</span></p>
+            <p class="game-instructions">Usa `Espacio` o toca la pantalla para saltar los obstáculos.</p>
+            <p class="game-instructions"><small>Presiona 'Espacio' o el botón para empezar.</small></p>
+            <button id="dinoGameActionBtn" class="game-btn">Empezar Juego</button>
+          </div>
+          <div class="game-area" style="display: none;">
+            <canvas id="dinoCanvas" width="300" height="300"></canvas>
+            <p id="dino-score-display">Puntuación: <span id="dino-score">0</span></p>
+            <div class="game-over-menu" style="display: none;">
+              <h3>Game Over</h3>
+              <button class="game-btn">Volver a Jugar</button>
+            </div>
+            <div class="game-controls" id="snake-controls">
+              <button class="control-btn up" data-direction="up">▲</button>
+              <button class="control-btn left" data-direction="left">◀</button>
+              <button class="control-btn down" data-direction="down">▼</button>
+              <button class="control-btn right" data-direction="right">▶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© Elegance Caps - Hecho con estilo</small>
+    </div>
+  </footer>
+
+  <div id="achievement-toast" class="achievement-toast">
+    <div class="achievement-icon">🏆</div>
+    <div class="achievement-text">
+        <p class="achievement-title">¡Nuevo Récord!</p>
+        <p class="achievement-subtitle">Felicidades has superado tus limites</p>
+    </div>
+  </div>
+
+  <div id="tryhard-toast" class="achievement-toast">
+    <div class="achievement-icon"><img src="images/tryhard.jpg" alt="Tryhard"></div>
+    <div class="achievement-text">
+        <p class="achievement-title">¡Wow, eres impresionante!</p>
+        <p class="achievement-subtitle">Has superado los 1000 puntos</p>
+    </div>
+  </div>
+
+  <div id="gameover-toast" class="achievement-toast">
+    <div class="achievement-icon"><img src="images/game over.jpg" alt="Game Over"></div>
+    <div class="achievement-text">
+        <p class="achievement-title">Has perdido</p>
+        <p class="achievement-subtitle">¡Buen intento!</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
